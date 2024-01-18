@@ -1,0 +1,17 @@
+body {
+    font-family: Arial, sans-serif;
+    margin: 20px;
+}
+
+#app {
+    max-width: 600px;
+    margin: 0 auto;
+}
+
+button, input {
+    margin-bottom: 10px;
+}
+
+#users-list {
+    margin-top: 20px;
+}
