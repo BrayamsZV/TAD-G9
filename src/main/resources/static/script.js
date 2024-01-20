@@ -4,21 +4,21 @@ function getUsers() {
     fetch(apiUrl)
         .then(response => response.json())
         .then(users => displayUsers(users))
-        .catch(error => console.error('Error fetching users:', error));
+        .catch(error => console.error('Error al recuperar usuario:', error));
 }
 
 function displayUsers(users) {
     const usersList = document.getElementById('users-list');
-    usersList.innerHTML = '<h2>Users</h2>';
+    usersList.innerHTML = '<h2>Usuarios</h2>';
 
     if (users.length === 0) {
-        usersList.innerHTML += '<p>No users found.</p>';
+        usersList.innerHTML += '<p>No se encontraron usuarios.</p>';
     } else {
         users.forEach(user => {
             const userContainer = document.createElement('div');
             userContainer.innerHTML = `
                 <p>${user.firstName} ${user.lastName} - ${user.email}</p>
-                <button onclick="deleteUser(${user.id})">Delete</button>
+                <button onclick="deleteUser(${user.id})">Eliminar</button>
             `;
             usersList.appendChild(userContainer);
         });
@@ -47,10 +47,10 @@ function saveUser(event) {
     })
     .then(response => response.json())
     .then(savedUser => {
-        console.log('User saved:', savedUser);
+        console.log('Usuario guardado:', savedUser);
         getUsers(); // Refrescar la lista después de guardar
     })
-    .catch(error => console.error('Error saving user:', error));
+    .catch(error => console.error('Error, no se puedo guardar:', error));
 }
 
 function deleteUser(id) {
@@ -59,11 +59,11 @@ function deleteUser(id) {
     })
     .then(response => {
         if (response.ok) {
-            console.log(`User with ID ${id} deleted successfully.`);
+            console.log(`Usuario con ID ${id} eliminado exitosamente.`);
             getUsers(); // Refrescar la lista después de la eliminación
         } else {
-            console.error(`Error deleting user with ID ${id}.`);
+            console.error(`Error al eliminar usuario con ID ${id}.`);
         }
     })
-    .catch(error => console.error('Error deleting user:', error));
+    .catch(error => console.error('Error al eliminar usuario:', error));
 }
